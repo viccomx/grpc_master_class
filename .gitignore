@@ -7,6 +7,7 @@ conf/*
 .classpath
 .project
 target/
+pom.xml.versionsBackup
 .DS_Store
 *log.txt
 *keys.yml
@@ -17,14 +18,13 @@ target/
 gensrc/
 /.nb-gradle/
 .idea*
-dataSources/
+
+# Ignore all logfiles since the docker-compose setup
+# mounts this repo for r/w and java dumps logs here
+*.log
 
 .ipynb_checkpoints
 .vscode
 JavaSnip.ipynb
 *.factorypath
 storage
-.shelf/
-
-# documentation bundle
-documentation/bundle/
