@@ -1,6 +1,8 @@
 package com.viccomx.grpc.greeting.client;
 
-import com.proto.dummy.DummyServiceGrpc;
+import com.proto.greet.GreetRequest;
+import com.proto.greet.GreetServiceGrpc;
+import com.proto.greet.Greeting;
 import io.grpc.ManagedChannelBuilder;
 
 /**
@@ -22,12 +24,22 @@ public class GreetingClient {
 
     // Create synchronous stub
     System.out.println("Creating stub");
-    final var syncClient = DummyServiceGrpc.newBlockingStub(channel);
+    final var greetBlockingStub = GreetServiceGrpc.newBlockingStub(channel);
 
-    // Create an asynchronous stub
-    // final var asyncClient = DummyServiceGrpc.newFutureStub(channel);
+    // Create request
+    final var greeting = Greeting.newBuilder()
+      .setFirstName("Vicco")
+      .setLastName("Cush")
+      .build();
+    final var greetRequest = GreetRequest.newBuilder()
+      .setGreeting(greeting)
+      .build();
+
+    // Call service and get response
+    final var response = greetBlockingStub.greet(greetRequest);
 
     // Do something
+    System.out.println(response.getResult());
 
     System.out.println("Shutting down channel");
     channel.shutdown();

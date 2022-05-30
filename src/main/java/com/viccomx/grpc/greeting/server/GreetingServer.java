@@ -17,6 +17,7 @@ public class GreetingServer {
 
     // Create the server
     final var server = ServerBuilder.forPort(PORT)
+      .addService(new GreetServerImpl())
       .build();
 
     // Start the server
